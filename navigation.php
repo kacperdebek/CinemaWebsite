@@ -10,10 +10,10 @@
 			</li> 
 		<?php }else{?>
 			<li class="nav-item">
-				<a class="nav-link <?php if ($CURRENT_PAGE == "Login") {?>active<?php }?>" href="login.php">Login</a>
+				<a class="nav-link" href="login.php">Login</a>
 			</li> 
 			<li class="nav-item">
-	    		<a class="nav-link <?php if ($CURRENT_PAGE == "Signup") {?>active<?php }?>" href="signup.php">Sign Up</a>
+	    		<a class="nav-link" href="signup.php">Sign Up</a>
 	    	</li>
 		<?php } ?>		
 	</ul>

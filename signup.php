@@ -7,12 +7,22 @@ error_reporting(E_ALL);
 require_once "config.php";
  
 // Define variables and initialize with empty values
-$username = $password = $confirm_password = $email ="";
-$username_err = $password_err = $confirm_password_err = $email_err = "";
+$username = $password = $confirm_password = $email = $surname = $name = $phone = "";
+$username_err = $password_err = $confirm_password_err = $email_err = $surname_err = $name_err = $phone_err = "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
+    if(empty(trim($_POST["name"]))){
+        $name_err = "Please enter your name.";
+    } else{
+        $name = trim($_POST["name"]);
+    }
+    if(empty(trim($_POST["surname"]))){
+        $surname_err = "Please enter your surname.";
+    } else{
+        $surname = trim($_POST["surname"]);
+    }
     // Validate username
     if(empty(trim($_POST["username"]))){
         $username_err = "Please enter a username.";
@@ -45,11 +55,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     if(empty(trim($_POST["email"]))){
         $email_err = "Please enter your email.";
-    }
-    elseif(!filter_var(trim($_POST["email"]), FILTER_VALIDATE_EMAIL)) {
+    } elseif(!filter_var(trim($_POST["email"]), FILTER_VALIDATE_EMAIL)) {
         $email_err = "Invalid email address";
-    }
-    else{
+    } else{
         // Prepare a select statement
         $sql = "SELECT id_klienta FROM klient WHERE email = ?";
         
@@ -94,21 +102,54 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $confirm_password_err = "Password did not match.";
         }
     }
-    
+    if(empty(trim($_POST["phone"]))){
+        $phone_err = "Please enter your phone number.";     
+    } elseif(strlen(trim($_POST["phone"])) < 9 || strlen(trim($_POST["phone"])) > 13 || !ctype_digit(trim($_POST["phone"]))){
+        $phone_err = "Invalid phone number."; 
+    } else{
+        // Prepare a select statement
+        $sql = "SELECT id_klienta FROM klient WHERE nr_telefonu = ?";
+        
+        if($stmt = $mysqli->prepare($sql)){
+            // Bind variables to the prepared statement as parameters
+            $stmt->bind_param("s", $param_phone);
+            
+            // Set parameters
+            $param_phone = trim($_POST["phone"]);
+            
+            // Attempt to execute the prepared statement
+            if($stmt->execute()){
+                // store result
+                $stmt->store_result();
+                if($stmt->num_rows == 1){
+                    $phone_err = "This phone number is already in use.";
+                } else{
+                    $phone = trim($_POST["phone"]);
+                }
+            } else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+            // Close statement
+            $stmt->close();
+        }
+    }
     // Check input errors before inserting in database
-    if(empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($email_err)){
+    if(empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($email_err) && empty($name_err) && empty($surname_err) && empty($phone_err)){
         
         // Prepare an insert statement
-        $sql = "INSERT INTO klient (nazwa_użytkownika, hasło, email) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO klient (imię, nazwisko, nazwa_użytkownika, hasło, email, nr_telefonu) VALUES (?, ?, ?, ?, ?, ?)";
          
         if($stmt = $mysqli->prepare($sql)){
             // Bind variables to the prepared statement as parameters
-            $stmt->bind_param("sss", $param_username, $param_password, $param_email);
+            $stmt->bind_param("ssssss", $param_name, $param_surname, $param_username, $param_password, $param_email, $param_phone);
             
             // Set parameters
             $param_username = $username;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
             $param_email = $email;
+            $param_name = $name;
+            $param_surname = $surname;
+            $param_phone = $phone;
             // Attempt to execute the prepared statement
             if($stmt->execute()){
                 // Redirect to login page
@@ -135,7 +176,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <style type="text/css">
         body{ font: 14px sans-serif; }
-        .wrapper{ width: 350px; padding: 20px; }
+        .wrapper{ width: 350px; padding: 20px; margin: 0 auto;} 
     </style>
 </head>
 <body>
@@ -143,6 +184,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <h2>Sign Up</h2>
         <p>Please fill this form to create an account.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <div class="form-group <?php echo (!empty($name_err)) ? 'has-error' : ''; ?>">
+                <label>Name</label>
+                <input type="text" name="name" class="form-control" value="<?php echo $name; ?>">
+                <span class="help-block"><?php echo $name_err; ?></span>
+            </div>    
+            <div class="form-group <?php echo (!empty($surname_err)) ? 'has-error' : ''; ?>">
+                <label>Surname</label>
+                <input type="text" name="surname" class="form-control" value="<?php echo $surname; ?>">
+                <span class="help-block"><?php echo $surname_err; ?></span>
+            </div> 
             <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                 <label>Username</label>
                 <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
@@ -162,6 +213,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <label>Email</label>
                 <input type="text" name="email" class="form-control" value="<?php echo $email; ?>">
                 <span class="help-block"><?php echo $email_err; ?></span>
+            </div>
+            <div class="form-group <?php echo (!empty($phone_err)) ? 'has-error' : ''; ?>">
+                <label>Phone number</label>
+                <input type="text" name="phone" class="form-control" value="<?php echo $phone; ?>">
+                <span class="help-block"><?php echo $phone_err; ?></span>
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Submit">

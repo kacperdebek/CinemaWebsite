@@ -101,7 +101,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </head>
 <body>
     <div class="wrapper">
-        
         <h2>Login <a href="#"><img src="resources/back.png" alt="back_arrow" onclick="history.go(-1);"style="float: right;"/></a></h2>
         <p>Please fill in your credentials to login.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">

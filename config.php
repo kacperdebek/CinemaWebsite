@@ -10,17 +10,22 @@ $mysqli = new mysqli($servername, $username, $password, $database);
 if ($mysqli->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-	switch ($_SERVER["SCRIPT_NAME"]) {
-		case "login.php":
-			$CURRENT_PAGE = "Login"; 
-			$PAGE_TITLE = "Log in";
-			break;
-		case "signup.php":
-			$CURRENT_PAGE = "Register"; 
-			$PAGE_TITLE = "Sign Up";
-			break;
-		default:
-			$CURRENT_PAGE = "Index";
-			$PAGE_TITLE = "Homepage";
-	}
+switch ($_SERVER["PHP_SELF"]) {
+	case "/login.php":
+		$CURRENT_PAGE = "Login"; 
+		$PAGE_TITLE = "Logowanie";
+		break;
+	case "/signup.php":
+		$CURRENT_PAGE = "Register"; 
+		$PAGE_TITLE = "Rejestracja";
+		break;
+	case "/movies.php":
+		$CURRENT_PAGE = "Movies"; 
+		$PAGE_TITLE = "Repertuar";
+		break;
+	default:
+		$CURRENT_PAGE = "Index";
+		$PAGE_TITLE = "Strona domowa";
+		break;
+}
 ?>

@@ -17,4 +17,34 @@
 		font-size: 14px;
 		text-align: center;
 	}
+	.nav-right {
+		display:-webkit-box;
+		display:-ms-flexbox;
+		display:flex;
+		-ms-flex-wrap:wrap;
+		flex-wrap:wrap;
+		padding-left:0;
+		margin-bottom:0;
+		margin-left:55%;
+		list-style:none
+	}
+	.nav-item:hover {
+		border: 1px solid #007bff;
+		border-radius:.25rem;
+	}
+	.nav-item-right {
+		-webkit-box-flex:1;
+		-ms-flex:1 1 auto;
+		flex:1 1 auto;
+		text-align:center;
+		margin-left:55%;
+		border: 1px solid #007bff;
+	}
+	.logo {
+		background: url("resources/logo.png") no-repeat;
+		width: 50px; 
+		height: 50px; 
+		display: block;
+	}
+	
 </style>

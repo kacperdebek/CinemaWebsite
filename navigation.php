@@ -8,7 +8,6 @@
 				<a class="nav-link <?php if ($CURRENT_PAGE == "Movies") {?>active<?php }?>" href="movies.php">Repertuar</a>
 			</li>
 		</ul>
-		<?php session_start(); ?>
 		<?php if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){?>
 			<li class="nav-item-right">
 				<a class="nav-link" href="logout.php">Wyloguj</a>

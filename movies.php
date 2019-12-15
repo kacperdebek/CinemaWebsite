@@ -1,4 +1,5 @@
 <?php include("config.php");?>
+<?php session_start(); ?>
 <?php 
 	$result = mysqli_query($mysqli,"SELECT * FROM film"); 
 	while($row = mysqli_fetch_array($result)) {
@@ -30,8 +31,7 @@
 	})
 	</script>
 	<script>
-		function generateMovies(arr) 
-		{
+		function generateMovies(arr) {
 			var button;
 			if(event === undefined) {
 				button = "1";
@@ -69,7 +69,6 @@
 			}
 		}
 	</script>
-	
 </head>
 <body>
 <?php include("navigation.php");?>
@@ -127,7 +126,14 @@
 			var hour = $(this).text();
 			var movie = $(this).parent().parent().children().eq(1).text();	
 			var day = $('.btn.btn-primary.active').text();
+			<?php 
+				if(isset($_SESSION["username"])){
+			?>	
 			window.location.href = "seats.php?hour="+hour+"&movie="+movie+"&day="+day;
+			<?php
+				}   
+			?>
+			
 		})
 </script>
 </body>

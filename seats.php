@@ -1,4 +1,5 @@
 <?php include("config.php");?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,8 +8,9 @@
     <link rel="stylesheet" href="seats.css">
 </head>
 <body>
+<div class="container" id="main-content">
+    <h3 id="seatlist">Wybrane miejsca: </h3>
     <div class="theatre">
-    
         <div class="cinema-seats left">
             <div class="cinema-row row-1">
             <div class="seat" id="s1"></div>
@@ -154,7 +156,72 @@
             </div>
         </div>
     </div>
-    <button type="button" class="btn" id="button">tekst</button>
-    <script src="seats.js"></script>
+    <button type="button" class="btn" id="request" style="margin-left: 50%">Zamów</button>
+</div>
+    
+     <script>
+        function getSearchParameters() {
+            var prmstr = window.location.search.substr(1);
+            return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
+        }
+        function transformToAssocArray( prmstr ) {
+            var params = {};
+            var prmarr = prmstr.split("&");
+            for ( var i = 0; i < prmarr.length; i++) {
+                var tmparr = prmarr[i].split("=");
+                params[tmparr[0]] = tmparr[1];
+            }
+            return params;
+        }
+
+        var selected = []; 
+        var hour;
+        var day;
+        var film;
+        var userid;
+        $('.cinema-seats .seat').on('click', function() {
+            $(this).toggleClass('active');
+            var element = $(this).attr('id');
+            if(selected.includes(element)){
+                var index = selected.indexOf(element);
+                selected.splice(index, 1);
+            }
+            else {
+                selected.push(element);
+            }
+            document.getElementById("seatlist").innerHTML = "";
+            document.getElementById("seatlist").innerHTML += "Wybrane miejsca: " + selected;
+            hour = getSearchParameters().hour;
+            day = getSearchParameters().day;
+            film = decodeURIComponent(getSearchParameters().movie);
+            <?php 
+			    if(isset($_SESSION["id"])){
+            ?>
+            userid = JSON.stringify(<?php echo $_SESSION["id"] ?>);
+            <?php
+            }   
+            ?>
+        });
+        <?php 
+			if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+		?>
+            $('.btn').on('click', function(){
+                if(hour !== undefined && day !== undefined && film !== undefined && userid !== undefined) {
+                    $.ajax({
+                        url: 'order.php',
+                        type: 'POST',
+                        data: {"hour" : hour, "day" : day, "film" : film, "userid" : userid},
+                        success: function(data) {
+                            document.write(data);
+                        }
+                    });
+                }
+            })
+        <?php
+            }   
+        ?>
+     </script>
 </body>
 </html>
+
+<!-- //#4EBB7D fajny kolor -->

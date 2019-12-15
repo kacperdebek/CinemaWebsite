@@ -1,5 +1,5 @@
-
 <?php include("config.php");?>
+<?php session_start(); ?>
 <!DOCTYPE html>
  
 <html>
@@ -10,7 +10,6 @@
 
 <?php #include("includes/design-top.php");?>
 <?php include("navigation.php");?>
-
 <div class="container bg-dark" id="main-content">
 	<div class="slideshow-container">
 		<h2>Najnowsze premiery</h2>

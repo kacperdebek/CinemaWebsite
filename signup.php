@@ -153,7 +153,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <div class="wrapper">
         <a href="#"><img src="resources/back.png" alt="back_arrow" onclick="history.go(-1);" style="float: right;"/></a>
         <h2>Rejestracja</h2>
-        <!-- <p>Please fill this form to create an account.</p> -->
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group <?php echo (!empty($name_err)) ? 'has-error' : ''; ?>">
                 <label>Imię</label>

@@ -8,7 +8,6 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link type="text/css" rel="stylesheet" href="slides.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -18,36 +17,9 @@
 		background-color: #343A40;
 		color:white;
 	}
-	#main-content {
-		margin-top:20px;
-	}
 	.footer {
 		font-size: 14px;
 		text-align: center;
-	}
-	.nav-right {
-		display:-webkit-box;
-		display:-ms-flexbox;
-		display:flex;
-		-ms-flex-wrap:wrap;
-		flex-wrap:wrap;
-		padding-left:0;
-		margin-bottom:0;
-		margin-left:55%;
-		list-style:none
-	}
-	.nav-item:hover {
-		border: 1px solid #007bff;
-		border-radius:.25rem;
-	}
-	.nav-item-right {
-		-webkit-box-flex:1;
-		-ms-flex:1 1 auto;
-		flex:1 1 auto;
-		text-align:center;
-		margin-left:55%;
-		border: 1px solid #007bff;
-		background-color: #343A80;
 	}
 	.logo {
 		background: url("resources/logo.png") no-repeat;
@@ -62,5 +34,24 @@
 	.left-margin-15 {
 		margin-left: 15px;
 	}
-	
+	.white-outline {
+		outline: 2px solid #ccc;
+	}
+	.center-pills {
+		display: flex;
+		justify-content: center;
+	}
+	.container-full {
+		margin: 0 auto;
+		width: 100%;
+	}
+	.navbar {
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+	.nav-pills .nav-link {
+		padding-top: 15px;
+		padding-bottom: 15px;
+		border-radius: 0;
+	}
 </style>

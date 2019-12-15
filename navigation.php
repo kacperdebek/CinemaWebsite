@@ -1,26 +1,22 @@
-<div class="container">
-	<ul class="nav nav-pills">	
-		<ul class="nav nav-pills">
-			<li class="nav-item">
-				<a class="nav-link <?php if ($CURRENT_PAGE == "Index") {?>active<?php }?>" href="index.php">Strona główna</a>
-			</li>	
-			<li class="nav-item">
-				<a class="nav-link <?php if ($CURRENT_PAGE == "Movies") {?>active<?php }?>" href="movies.php">Repertuar</a>
-			</li>
-		</ul>
+<div class="container-full">
+	<ul class="nav nav-pills center-pills">
+		<li class="nav-itemn">
+			<a class="nav-link <?php if ($CURRENT_PAGE == "Index") {?>active<?php }?>" href="index.php">Strona główna</a>
+		</li>	
+		<li class="nav-item">
+			<a class="nav-link <?php if ($CURRENT_PAGE == "Movies") {?>active<?php }?>" href="movies.php">Repertuar</a>
+		</li>
 		<?php if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){?>
-			<li class="nav-item-right">
-				<a class="nav-link" href="logout.php">Wyloguj</a>
-			</li> 
+		<li class="nav-item">
+			<a class="nav-link" href="logout.php">Wyloguj</a>
+		</li> 
 		<?php }else{?>
-		<ul class="nav-right nav-pills">
-			<li class="nav-item">
-				<a class="nav-link" href="login.php">Zaloguj się</a>
-			</li> 
-			<li class="nav-item">
-				<a class="nav-link" href="signup.php">Zarejestruj się</a>
-			</li>
-		</ul>
+		<li class="nav-item">
+			<a class="nav-link" href="login.php">Zaloguj się</a>
+		</li> 
+		<li class="nav-item">
+			<a class="nav-link" href="signup.php">Zarejestruj się</a>
+		</li>
+		<?php } ?>	
 	</ul>
-	<?php } ?>	
 </div>

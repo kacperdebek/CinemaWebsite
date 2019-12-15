@@ -64,8 +64,12 @@
 				document.getElementById("col" + (k + 4)).innerHTML += "<p>" + age_array[arr[i-1]] + "</p>"
 				document.getElementById("col" + (k + 5)).innerHTML += "<p>Rok premiery: " + "</p>"
 				document.getElementById("col" + (k + 5)).innerHTML += "<p>" + year_array[arr[i-1]] + "</p>"
-				document.getElementById("col" + (k + 6)).innerHTML += "<button type=" + " button" + " class=" + " btn" + " id=" + "button" + l +">15:30</button>"
-				document.getElementById("col" + (k + 6)).innerHTML += "<button type=" + " button" + " class=" + " btn" + " id=" + "button" + (l + 1) +">19:30</button>"
+				<?php if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){ ?>
+					document.getElementById("col" + (k + 6)).innerHTML += "<button type=" + " button" + " class=" + " btn" + " id=" + "button" + l +">15:30</button>"
+					document.getElementById("col" + (k + 6)).innerHTML += "<button type=" + " button" + " class=" + " btn" + " id=" + "button" + (l + 1) +">19:30</button>"
+				<?php } else { ?>
+					document.getElementById("col" + (k + 6)).innerHTML += "<h7 style=" + "color:#dd4848" + ">Zaloguj się aby kupić bilet</h7>"
+				<?php } ?>
 			}
 		}
 	</script>
@@ -75,7 +79,7 @@
 
 <div class="container" id="main-content">
 	<div class="col text-center">
-		<div class="btn-group ">
+		<div class="btn-group" style="margin-bottom: 60px">
 			<button type="button" class="btn btn-primary active" id="1" onClick="generateMovies([1,2,3,4])">Pon</button>
 			<button type="button" class="btn btn-primary" id="2" onClick="generateMovies([5,6,0,2])">Wt</button>
 			<button type="button" class="btn btn-primary" id="3" onClick="generateMovies([6,1,4,0])">Śr</button>
@@ -85,7 +89,7 @@
 			<button type="button" class="btn btn-primary" id="7" onClick="generateMovies([0,5,6,3])">Ndz</button>
 		</div>
 		<div class="col" id="movie-content">
-				<div class="row align-items-center" id="mov1">
+				<div class="row align-items-center white-outline" id="mov1">
 					<div class="col" id="col1"></div>
 					<div class="col" id="col2"></div>
 					<div class="col" id="col3"></div>
@@ -93,7 +97,7 @@
 					<div class="col" id="col5"></div>
 					<div class="col" id="col6"></div>
 				</div>
-				<div class="row mt-2 align-items-center" id="mov2">
+				<div class="row mt-2 align-items-center white-outline" id="mov2">
 					<div class="col" id="col7"></div>
 					<div class="col" id="col8"></div>
 					<div class="col" id="col9"></div>
@@ -101,7 +105,7 @@
 					<div class="col" id="col11"></div>
 					<div class="col" id="col12"></div>
 				</div>
-				<div class="row mt-2 align-items-center" id="mov3">
+				<div class="row mt-2 align-items-center white-outline" id="mov3">
 					<div class="col" id="col13"></div>
 					<div class="col" id="col14"></div>
 					<div class="col" id="col15"></div>
@@ -109,7 +113,7 @@
 					<div class="col" id="col17"></div>
 					<div class="col" id="col18"></div>
 				</div>
-				<div class="row mt-2 align-items-center" id="mov4">
+				<div class="row mt-2 align-items-center white-outline" id="mov4">
 					<div class="col" id="col19"></div>
 					<div class="col" id="col20"></div>
 					<div class="col" id="col21"></div>

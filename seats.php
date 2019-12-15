@@ -9,7 +9,8 @@
 </head>
 <body>
 <div class="container" id="main-content">
-    <h3 id="seatlist">Wybrane miejsca: </h3>
+    <h3 id="desc"></h3>
+    <h4 id="seatlist">Wybrane miejsca: </h4>
     <div class="theatre">
         <div class="cinema-seats left">
             <div class="cinema-row row-1">
@@ -160,6 +161,7 @@
 </div>
     
      <script>
+     
         function getSearchParameters() {
             var prmstr = window.location.search.substr(1);
             return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
@@ -175,10 +177,13 @@
         }
 
         var selected = []; 
-        var hour;
-        var day;
-        var film;
+        var hour = getSearchParameters().hour;
+        var day = getSearchParameters().day;
+        var film = decodeURIComponent(getSearchParameters().movie);
         var userid;
+        if(document.getElementById("desc").innerHTML === ""){
+                document.getElementById("desc").innerHTML = "Wybrany seans: " + film + " " + day + " godz." + hour;
+        }
         $('.cinema-seats .seat').on('click', function() {
             $(this).toggleClass('active');
             var element = $(this).attr('id');
@@ -191,9 +196,8 @@
             }
             document.getElementById("seatlist").innerHTML = "";
             document.getElementById("seatlist").innerHTML += "Wybrane miejsca: " + selected;
-            hour = getSearchParameters().hour;
-            day = getSearchParameters().day;
-            film = decodeURIComponent(getSearchParameters().movie);
+            
+            
             <?php 
 			    if(isset($_SESSION["id"])){
             ?>
@@ -207,10 +211,11 @@
 		?>
             $('.btn').on('click', function(){
                 if(hour !== undefined && day !== undefined && film !== undefined && userid !== undefined) {
+                    var seats = JSON.stringify(selected); 
                     $.ajax({
                         url: 'order.php',
                         type: 'POST',
-                        data: {"hour" : hour, "day" : day, "film" : film, "userid" : userid},
+                        data: {"hour" : hour, "day" : day, "film" : film, "userid" : userid, "seats" : seats},
                         success: function(data) {
                             document.write(data);
                         }
@@ -223,5 +228,3 @@
      </script>
 </body>
 </html>
-
-<!-- //#4EBB7D fajny kolor -->

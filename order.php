@@ -16,7 +16,7 @@
     $my_id_array = mysqli_fetch_assoc($showing);
     $my_id = $my_id_array['id_seansu'];
     $query = mysqli_query($mysqli,"INSERT INTO zamówienie (id_seansu, id_klienta, status_zamówienia) VALUES ($my_id, $userid, 'W realizacji')");
-    
+    $seats = json_decode(stripslashes($_POST['seats']));
 ?>
 <script> 
     alert("Zamówiono pomyślnie"); 

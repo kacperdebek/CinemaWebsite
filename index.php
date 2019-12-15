@@ -5,26 +5,26 @@
 <html>
 <head>
 	<?php include("head-tag-contents.php");?>
+	<link type="text/css" rel="stylesheet" href="slides.css">
 </head>
 <body>
-
+<!-- <img src="resources/cinema-slide.jpg" style="width:100%"> -->
 <?php #include("includes/design-top.php");?>
 <?php include("navigation.php");?>
-<div class="container bg-dark" id="main-content">
+<div class="container-full bg-dark" id="main-content">
 	<div class="slideshow-container">
-		<h2>Najnowsze premiery</h2>
 		<div class="mySlides">
-			<img src="resources/img1.png" style="width:100%">
+			<img src="resources/image1.jpg" style="width:100%">
 			<div class="text">Gwiezdne wojny: Skywalker. Odrodzenie</div>
 		</div>
 
 		<div class="mySlides fade">
-			<img src="resources/img2.png" style="width:100%">
+			<img src="resources/image2.jpg" style="width:100%">
 			<div class="text">Osierocony Brooklyn </div>
 		</div>
 
 		<div class="mySlides fade">
-			<img src="resources/img4.jpg" style="width:100%">
+			<img src="resources/image3.jpg" style="width:100%">
 			<div class="text">Oficer i szpieg</div>
 		</div>
 		<a class="prev" onclick="plusSlides(-1)">&#10094;</a>

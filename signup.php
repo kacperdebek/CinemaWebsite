@@ -14,18 +14,18 @@ $username_err = $password_err = $confirm_password_err = $email_err = $surname_er
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
     if(empty(trim($_POST["name"]))){
-        $name_err = "Please enter your name.";
+        $name_err = "Wprowadź swoje imię";
     } else{
         $name = trim($_POST["name"]);
     }
     if(empty(trim($_POST["surname"]))){
-        $surname_err = "Please enter your surname.";
+        $surname_err = "Wprowadź swoje nazwisko.";
     } else{
         $surname = trim($_POST["surname"]);
     }
     // Validate username
     if(empty(trim($_POST["username"]))){
-        $username_err = "Please enter a username.";
+        $username_err = "Wprowadź nazwę użytkownika.";
     } else{
         // Prepare a select statement
         $sql = "SELECT id_klienta FROM klient WHERE nazwa_użytkownika = ?";
@@ -42,21 +42,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // store result
                 $stmt->store_result();
                 if($stmt->num_rows == 1){
-                    $username_err = "This username is already taken.";
+                    $username_err = "Podana nazwa użytkownika jest juz zajęta.";
                 } else{
                     $username = trim($_POST["username"]);
                 }
             } else{
-                echo "Oops! Something went wrong. Please try again later.";
+                echo "Ups! Coś poszło nie tak. Odczekaj chwilę i spróbuj ponownie.";
             }
             // Close statement
             $stmt->close();
         }
     }
     if(empty(trim($_POST["email"]))){
-        $email_err = "Please enter your email.";
+        $email_err = "Wprowadź swój adres email.";
     } elseif(!filter_var(trim($_POST["email"]), FILTER_VALIDATE_EMAIL)) {
-        $email_err = "Invalid email address";
+        $email_err = "Nieprawidłowy adres email.";
     } else{
         // Prepare a select statement
         $sql = "SELECT id_klienta FROM klient WHERE email = ?";
@@ -73,12 +73,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // store result
                 $stmt->store_result();
                 if($stmt->num_rows == 1){
-                    $email_err = "This email is already taken.";
+                    $email_err = "Konto z podanym adresem email już istnieje.";
                 } else{
                     $email = trim($_POST["email"]);
                 }
             } else{
-                echo "Oops! Something went wrong. Please try again later.";
+                echo "Ups! Coś poszło nie tak. Odczekaj chwilę i spróbuj ponownie.";
             }
             // Close statement
             $stmt->close();
@@ -86,26 +86,26 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     // Validate password
     if(empty(trim($_POST["password"]))){
-        $password_err = "Please enter a password.";     
+        $password_err = "Wprowadź hasło.";     
     } elseif(strlen(trim($_POST["password"])) < 6){
-        $password_err = "Password must have atleast 6 characters.";
+        $password_err = "Hasło musi posiadać minimum 6 znaków.";
     } else{
         $password = trim($_POST["password"]);
     }
     
     // Validate confirm password
     if(empty(trim($_POST["confirm_password"]))){
-        $confirm_password_err = "Please confirm password.";     
+        $confirm_password_err = "Potwierdź hasło.";     
     } else{
         $confirm_password = trim($_POST["confirm_password"]);
         if(empty($password_err) && ($password != $confirm_password)){
-            $confirm_password_err = "Password did not match.";
+            $confirm_password_err = "Hasła nie są identyczne.";
         }
     }
     if(empty(trim($_POST["phone"]))){
-        $phone_err = "Please enter your phone number.";     
+        $phone_err = "Wprowadź swój numer telefonu.";     
     } elseif(strlen(trim($_POST["phone"])) < 9 || strlen(trim($_POST["phone"])) > 13 || !ctype_digit(trim($_POST["phone"]))){
-        $phone_err = "Invalid phone number."; 
+        $phone_err = "Niewłaściwy numer telefonu."; 
     } else{
         // Prepare a select statement
         $sql = "SELECT id_klienta FROM klient WHERE nr_telefonu = ?";
@@ -122,12 +122,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // store result
                 $stmt->store_result();
                 if($stmt->num_rows == 1){
-                    $phone_err = "This phone number is already in use.";
+                    $phone_err = "Konto o podanym numerze telefonu już istnieje.";
                 } else{
                     $phone = trim($_POST["phone"]);
                 }
             } else{
-                echo "Oops! Something went wrong. Please try again later.";
+                echo "Ups! Coś poszło nie tak. Odczekaj chwilę i spróbuj ponownie.";
             }
             // Close statement
             $stmt->close();
@@ -155,7 +155,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // Redirect to login page
                 header("location: login.php");
             } else{
-                echo "Something went wrong. Please try again later." . mysqli_error($mysqli);
+                echo "Coś poszło nie tak. Odczekaj chwilę i spróbuj ponownie." . mysqli_error($mysqli);
             }
         }
          
@@ -175,55 +175,59 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <title>Sign Up</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <style type="text/css">
-        body{ font: 14px sans-serif; }
+        body { 
+            font: 14px sans-serif;
+            color: white;
+            background-color: #343A40; 
+        }
         .wrapper{ width: 350px; padding: 20px; margin: 0 auto;} 
     </style>
 </head>
 <body>
     <div class="wrapper">
         <a href="#"><img src="resources/back.png" alt="back_arrow" onclick="history.go(-1);" style="float: right;"/></a>
-        <h2>Sign Up</h2>
-        <p>Please fill this form to create an account.</p>
+        <h2>Rejestracja</h2>
+        <!-- <p>Please fill this form to create an account.</p> -->
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group <?php echo (!empty($name_err)) ? 'has-error' : ''; ?>">
-                <label>Name</label>
+                <label>Imię</label>
                 <input type="text" name="name" class="form-control" value="<?php echo $name; ?>">
                 <span class="help-block"><?php echo $name_err; ?></span>
             </div>    
             <div class="form-group <?php echo (!empty($surname_err)) ? 'has-error' : ''; ?>">
-                <label>Surname</label>
+                <label>Nazwisko</label>
                 <input type="text" name="surname" class="form-control" value="<?php echo $surname; ?>">
                 <span class="help-block"><?php echo $surname_err; ?></span>
             </div> 
             <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-                <label>Username</label>
+                <label>Nazwa użytkownika</label>
                 <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
                 <span class="help-block"><?php echo $username_err; ?></span>
             </div>    
             <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                <label>Password</label>
+                <label>Hasło</label>
                 <input type="password" name="password" class="form-control" value="<?php echo $password; ?>">
                 <span class="help-block"><?php echo $password_err; ?></span>
             </div>
             <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
-                <label>Confirm Password</label>
+                <label>Potwierdź hasło</label>
                 <input type="password" name="confirm_password" class="form-control" value="<?php echo $confirm_password; ?>">
                 <span class="help-block"><?php echo $confirm_password_err; ?></span>
             </div>
             <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
-                <label>Email</label>
+                <label>Adres email</label>
                 <input type="text" name="email" class="form-control" value="<?php echo $email; ?>">
                 <span class="help-block"><?php echo $email_err; ?></span>
             </div>
             <div class="form-group <?php echo (!empty($phone_err)) ? 'has-error' : ''; ?>">
-                <label>Phone number</label>
+                <label>Numer telefonu</label>
                 <input type="text" name="phone" class="form-control" value="<?php echo $phone; ?>">
                 <span class="help-block"><?php echo $phone_err; ?></span>
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Submit">
             </div>
-            <p>Already have an account? <a href="login.php">Login here</a>.</p>
+            <p>Posiadasz już konto? <a href="login.php">Zaloguj się</a>.</p>
         </form>
     </div>    
 </body>

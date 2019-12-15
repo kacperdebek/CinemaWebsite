@@ -20,14 +20,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
  
     // Check if username is empty
     if(empty(trim($_POST["username"]))){
-        $username_err = "Please enter username.";
+        $username_err = "Wprowadź login.";
     } else{
         $username = trim($_POST["username"]);
     }
     
     // Check if password is empty
     if(empty(trim($_POST["password"]))){
-        $password_err = "Please enter your password.";
+        $password_err = "Wprowadź hasło.";
     } else{
         $password = trim($_POST["password"]);
     }
@@ -67,15 +67,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             header("location: index.php");
                         } else{
                             // Display an error message if password is not valid
-                            $password_err = "The password you entered was not valid.";
+                            $password_err = "Nieprawidłowe hasło";
                         }
                     }
                 } else{
                     // Display an error message if username doesn't exist
-                    $username_err = "No account found with that username.";
+                    $username_err = "Konto o podanej nazwie nie istnieje";
                 }
             } else{
-                echo "Oops! Something went wrong. Please try again later.";
+                echo "Ups! Coś poszło nie tak. Odczekaj chwilę i spróbuj ponownie.";
             }
         }
         
@@ -95,29 +95,33 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <title>Login</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <style type="text/css">
-        body{ font: 14px sans-serif; }
+        body { 
+            font: 14px sans-serif; 
+            color: white;
+            background-color: #343A40;
+        }
         .wrapper{ width: 350px; padding: 20px; margin: 0 auto;}
     </style>
 </head>
 <body>
     <div class="wrapper">
-        <h2>Login <a href="#"><img src="resources/back.png" alt="back_arrow" onclick="history.go(-1);"style="float: right;"/></a></h2>
-        <p>Please fill in your credentials to login.</p>
+        <h2>Logowanie <a href="#"><img src="resources/back.png" alt="back_arrow" onclick="history.go(-1);"style="float: right;"/></a></h2>
+        <!-- <p>Please fill in your credentials to login.</p> -->
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-                <label>Username</label>
+                <label>Login</label>
                 <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
                 <span class="help-block"><?php echo $username_err; ?></span>
             </div>    
             <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                <label>Password</label>
+                <label>Hasło</label>
                 <input type="password" name="password" class="form-control">
                 <span class="help-block"><?php echo $password_err; ?></span>
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Login">
             </div>
-            <p>Don't have an account? <a href="signup.php">Sign up now</a>.</p>
+            <p>Nie masz konta? <a href="signup.php">Zarejestruj się</a>.</p>
         </form>
     </div>    
 </body>

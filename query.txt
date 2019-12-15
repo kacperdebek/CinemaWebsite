@@ -1,0 +1,11 @@
+			$query = mysqli_query($mysqli, "SELECT g.nazwa, f.id_filmu
+			FROM   gatunek g
+			JOIN   film_gatunki x ON g.id_gatunku = x.id_gatunku
+			JOIN  film f ON f.id_filmu = x.id_filmu");
+			$groupedArray = array();
+			foreach ($query as $item) {
+			   if(!isset($groupedArray[$item['id_filmu']])) {
+				   $groupedArray[$item['id_filmu']] = array();
+			   }  
+			   $groupedArray[$item['id_filmu']][] = $item;
+			}

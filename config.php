@@ -3,10 +3,8 @@ $servername = "localhost";
 $username = "root";
 $password = "1234567";
 $database = "cinemaDB";
-// Create connection
 $mysqli = new mysqli($servername, $username, $password, $database);
 
-// Check connection
 if ($mysqli->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }

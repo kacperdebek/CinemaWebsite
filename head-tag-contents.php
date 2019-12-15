@@ -5,11 +5,19 @@
 	<meta name="keywords" content="" /> 
 <?php } ?>
 
-<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link type="text/css" rel="stylesheet" href="slides.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <style>
+	body{
+		background-color: #343A40;
+		color:white;
+	}
 	#main-content {
 		margin-top:20px;
 	}
@@ -39,12 +47,20 @@
 		text-align:center;
 		margin-left:55%;
 		border: 1px solid #007bff;
+		background-color: #343A80;
 	}
 	.logo {
 		background: url("resources/logo.png") no-repeat;
 		width: 50px; 
 		height: 50px; 
 		display: block;
+	}
+	.col-centered {
+		float: none;
+		margin: 0 auto;
+	}
+	.left-margin-15 {
+		margin-left: 15px;
 	}
 	
 </style>

@@ -1,5 +1,4 @@
 <div class="container">
-<!-- <a class="logo" href="/"></a> -->
 	<ul class="nav nav-pills">	
 		<ul class="nav nav-pills">
 			<li class="nav-item">

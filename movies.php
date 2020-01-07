@@ -31,6 +31,28 @@
 	})
 	</script>
 	<script>
+		function movieDetails(elem){
+			window.location.href = "movie.php?name=" + document.getElementById(elem.parentNode.id).textContent;
+		}
+		function generateRandArray(size){
+			for (var a=[], i = 0; i < size; ++i){
+				a[i]=i;
+			} 
+			a = shuffle(a);
+			return a;
+		}
+		function shuffle(array) {
+			var tmp, current, top = array.length;
+			if(top) while(--top) {
+				current = Math.floor(Math.random() * (top + 1));
+				tmp = array[current];
+				array[current] = array[top];
+				array[top] = tmp;
+			}
+			return array;
+		}
+		
+	
 		function generateMovies(arr) {
 			var button;
 			if(event === undefined) {
@@ -57,7 +79,7 @@
 			for(i = 1, k = 0; i < arr.length + 1, k < (arr.length + 1)*6; i++, k += 6, l+=2){
 				if(k==24)break;
 				document.getElementById("col" + (k + 1)).innerHTML += "<img src=" + "resources/mov" + arr[i-1] + ".png" + ">"
-				document.getElementById("col" + (k + 2)).innerHTML += "<h3>" + title_array[arr[i-1]] + "</h3>"
+				document.getElementById("col" + (k + 2)).innerHTML += "<h3 onclick=" + "movieDetails(this)" + ">" + title_array[arr[i-1]] + "</h3>"
 				document.getElementById("col" + (k + 3)).innerHTML += "<p>Czas trwania: " + "</p>"
 				document.getElementById("col" + (k + 3)).innerHTML += "<p>" + duration_array[arr[i-1]] + "</p>"
 				document.getElementById("col" + (k + 4)).innerHTML += "<p>Kategoria wiekowa: " + "</p>"
@@ -127,13 +149,22 @@
 <script>generateMovies([1,2,3,4]);</script>
 <script>
 		$('[id^=col]').on('click','[id^=button]', {} ,function(){
-			var hour = $(this).text();
+			var hour = $(this).text()
 			var movie = $(this).parent().parent().children().eq(1).text();	
 			var day = $('.btn.btn-primary.active').text();
 			<?php 
 				if(isset($_SESSION["username"])){
 			?>	
-			window.location.href = "seats.php?hour="+hour+"&movie="+movie+"&day="+day;
+			//window.location.href = "seats.php?hour="+hour+"&movie="+movie+"&day="+day;
+			$.ajax({
+				url: 'seats.php',
+				type: 'POST',
+				data: {"hour" : hour, "day" : day, "film" : movie},
+				success: function(data) {
+					//alert(data);
+					document.write(data);
+				}
+			});
 			<?php
 				}   
 			?>

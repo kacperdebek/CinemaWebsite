@@ -5,8 +5,8 @@ body {
 .theatre {
   display: flex;
   position: relative;
-  margin-left: 20%;
-  margin-top: 30%;
+  margin-left: 20.5%;
+  margin-top: 10%;
 }
 .cinema-seats {
   display: flex;

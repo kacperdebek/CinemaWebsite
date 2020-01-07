@@ -161,25 +161,10 @@
 </div>
     
      <script>
-     
-        function getSearchParameters() {
-            var prmstr = window.location.search.substr(1);
-            return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
-        }
-        function transformToAssocArray( prmstr ) {
-            var params = {};
-            var prmarr = prmstr.split("&");
-            for ( var i = 0; i < prmarr.length; i++) {
-                var tmparr = prmarr[i].split("=");
-                params[tmparr[0]] = tmparr[1];
-            }
-            return params;
-        }
-
         var selected = []; 
-        var hour = getSearchParameters().hour;
-        var day = getSearchParameters().day;
-        var film = decodeURIComponent(getSearchParameters().movie);
+        var hour = "<?php echo $_POST['hour'];?>";
+        var day = "<?php echo $_POST['day'];?>";
+        var film = "<?php echo $_POST['film'];?>";
         var userid;
         if(document.getElementById("desc").innerHTML === ""){
                 document.getElementById("desc").innerHTML = "Wybrany seans: " + film + " " + day + " godz." + hour;
@@ -196,8 +181,6 @@
             }
             document.getElementById("seatlist").innerHTML = "";
             document.getElementById("seatlist").innerHTML += "Wybrane miejsca: " + selected;
-            
-            
             <?php 
 			    if(isset($_SESSION["id"])){
             ?>
@@ -210,7 +193,7 @@
 			if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 		?>
             $('.btn').on('click', function(){
-                if(hour !== undefined && day !== undefined && film !== undefined && userid !== undefined) {
+                if(hour !== undefined && day !== undefined && film !== undefined && userid !== undefined && selected.length > 0) {
                     var seats = JSON.stringify(selected); 
                     $.ajax({
                         url: 'order.php',

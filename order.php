@@ -15,12 +15,12 @@
     $showing = mysqli_query($mysqli,"SELECT id_seansu FROM seans WHERE dzień = '$day' and godzina = '$hour' and id_filmu = (SELECT id_filmu from film where tytuł_filmu = '$film')");
     $my_id_array = mysqli_fetch_assoc($showing);
     $my_id = $my_id_array['id_seansu'];
-    $query = mysqli_query($mysqli,"INSERT INTO zamówienie (id_seansu, id_klienta, status_zamówienia) VALUES ($my_id, $userid, 'W realizacji')");
+    $query = mysqli_query($mysqli,"INSERT INTO zamówienie (id_seansu, id_klienta, status_zamówienia) VALUES ($my_id, $userid, 'Oczekiwanie na płatność')");
     $seats = json_decode(stripslashes($_POST['seats']));
+    
 ?>
 <script> 
-    alert("Zamówiono pomyślnie"); 
-    window.location.href = "index.php";
+    window.location.href = "ordersuccess.php";
 </script>
 </body>
 </html>

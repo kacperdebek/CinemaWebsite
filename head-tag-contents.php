@@ -40,6 +40,8 @@
 	.center-pills {
 		display: flex;
 		justify-content: center;
+		background-color: #1C4773;
+		border-bottom: 2px solid green;
 	}
 	.container-full {
 		margin: 0 auto;
@@ -53,5 +55,18 @@
 		padding-top: 15px;
 		padding-bottom: 15px;
 		border-radius: 0;
+	}
+	a:link {
+		font-size: 18px;
+	}
+	a:visited {
+		text-decoration: none;
+	}
+	a:hover {
+		color: green;
+		text-decoration: none;
+	}
+	a:active {
+		text-decoration: none;
 	}
 </style>

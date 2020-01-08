@@ -1,6 +1,5 @@
 body {
   margin: 60px;
-  background: #111;
 }
 .theatre {
   display: flex;
@@ -33,106 +32,33 @@ body {
   background: rgba(255, 255, 255, 0.6);
   border-radius: 7px;
 }
+.cinema-seats .seat.reserved{
+  background: linear-gradient(to top, #761818, #761818, #761818, #761818, #761818, #B54041, #F3686A);
+  pointer-events: none;
+}
 .left .cinema-row {
-  transform: skew(-15deg);
   margin: 0 6px;
 }
 .left .seat {
   width: 35px;
   height: 50px;
   border-radius: 7px;
-  background: linear-gradient(to top, #761818, #761818, #761818, #761818, #761818, #B54041, #F3686A);
-  margin-bottom: 10px;
-  transform: skew(20deg);
-  margin-top: -32px;
+  background: linear-gradient(to top, rgba(23,36,69,1) 0%, rgba(17,17,112,1) 59%, rgba(30,162,189,1) 100%);
+  transform: skew(0deg);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-}
-.left .row-2 {
-  transform: skew(-13deg);
-}
-.left .row-2 .seat {
-  transform: skew(18deg);
-}
-.left .row-3 {
-  transform: skew(-12deg);
-}
-.left .row-3 .seat {
-  transform: skew(16deg);
-}
-.left .row-4 {
-  transform: skew(-11deg);
-}
-.left .row-4 .seat {
-  transform: skew(15deg);
-}
-.left .row-5 {
-  transform: skew(-10deg);
-}
-.left .row-5 .seat {
-  transform: skew(12deg);
-}
-.left .row-6 {
-  transform: skew(-9deg);
-}
-.left .row-6 .seat {
-  transform: skew(10deg);
-}
-.left .row-7 {
-  transform: skew(-7deg);
-}
-.left .row-7 .seat {
-  transform: skew(8deg);
 }
 .right {
   margin-left: 70px;
 }
 .right .cinema-row {
-  transform: skew(7deg);
   margin: 0 6px;
 }
 .right .seat {
   width: 35px;
   height: 50px;
   border-radius: 7px;
-  background: linear-gradient(to top, #761818, #761818, #761818, #761818, #761818, #B54041, #F3686A);
-  margin-bottom: 10px;
-  transform: skew(-8deg);
-  margin-top: -32px;
+  background: linear-gradient(to top, rgba(23,36,69,1) 0%, rgba(17,17,112,1) 65%, rgba(30,162,189,1) 100%);
+  transform: skew(0deg);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
-.right .row-2 {
-  transform: skew(9deg);
-}
-.right .row-2 .seat {
-  transform: skew(-10deg);
-}
-.right .row-3 {
-  transform: skew(10deg);
-}
-.right .row-3 .seat {
-  transform: skew(-12deg);
-}
-.right .row-4 {
-  transform: skew(11deg);
-}
-.right .row-4 .seat {
-  transform: skew(-15deg);
-}
-.right .row-5 {
-  transform: skew(12deg);
-}
-.right .row-5 .seat {
-  transform: skew(-16deg);
-}
-.right .row-6 {
-  transform: skew(13deg);
-}
-.right .row-6 .seat {
-  transform: skew(-18deg);
-}
-.right .row-7 {
-  transform: skew(15deg);
-}
-.right .row-7 .seat {
-  transform: skew(-20deg);
-}
+

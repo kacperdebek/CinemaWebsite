@@ -13,6 +13,11 @@
 <html>
 <head>
 	<?php include("head-tag-contents.php");?>
+	<style>
+		h2:hover{
+			color: green;
+		};
+	</style>
 	<script type="text/javascript">
 	$( document ).ready(function changeText() {
 		var now = new Date();
@@ -32,7 +37,7 @@
 	</script>
 	<script>
 		function movieDetails(elem){
-			window.location.href = "movie.php?name=" + document.getElementById(elem.parentNode.id).textContent;
+			window.location.href = "movie.php?" + document.getElementById(elem.parentNode.id).textContent;
 		}
 		function generateRandArray(size){
 			for (var a=[], i = 0; i < size; ++i){
@@ -79,7 +84,7 @@
 			for(i = 1, k = 0; i < arr.length + 1, k < (arr.length + 1)*6; i++, k += 6, l+=2){
 				if(k==24)break;
 				document.getElementById("col" + (k + 1)).innerHTML += "<img src=" + "resources/mov" + arr[i-1] + ".png" + ">"
-				document.getElementById("col" + (k + 2)).innerHTML += "<h3 onclick=" + "movieDetails(this)" + ">" + title_array[arr[i-1]] + "</h3>"
+				document.getElementById("col" + (k + 2)).innerHTML += "<h2 onclick=" + "movieDetails(this)" + "><a href=\"#\">" + title_array[arr[i-1]] + "</a></h2>"
 				document.getElementById("col" + (k + 3)).innerHTML += "<p>Czas trwania: " + "</p>"
 				document.getElementById("col" + (k + 3)).innerHTML += "<p>" + duration_array[arr[i-1]] + "</p>"
 				document.getElementById("col" + (k + 4)).innerHTML += "<p>Kategoria wiekowa: " + "</p>"
@@ -148,7 +153,7 @@
 </div>
 <script>generateMovies([1,2,3,4]);</script>
 <script>
-		$('[id^=col]').on('click','[id^=button]', {} ,function(){
+		$('[id^=col]').on('click','[id^=button]',function(){
 			var hour = $(this).text()
 			var movie = $(this).parent().parent().children().eq(1).text();	
 			var day = $('.btn.btn-primary.active').text();

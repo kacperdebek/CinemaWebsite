@@ -21,9 +21,14 @@ switch ($_SERVER["PHP_SELF"]) {
 		$CURRENT_PAGE = "Movies"; 
 		$PAGE_TITLE = "Repertuar";
 		break;
+	case "/movie.php":
+		$CURRENT_PAGE = "Movie"; 
+		$PAGE_TITLE = "Details";
+		break;
 	default:
 		$CURRENT_PAGE = "Index";
 		$PAGE_TITLE = "Strona domowa";
 		break;
+	
 }
 ?>

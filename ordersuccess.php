@@ -11,9 +11,8 @@
 </script>
 </head>
 <body>
-<!-- <?php include("navigation.php");?> -->
 <div class="container">
-    <h3>Zamówienie pomyślne<h3>
+    <h3>Zamówienie złożone pomyślnie<h3>
     <button type="button" class="btn" id="confirm" style="margin-left: 50%" onClick="redirect()">Confirm</button> 
 </div>
 </body>

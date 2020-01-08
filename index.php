@@ -6,6 +6,32 @@
 <head>
 	<?php include("head-tag-contents.php");?>
 	<link type="text/css" rel="stylesheet" href="slides.css">
+	<style>
+		.icon-movies{
+			background-image : url(resources/icon1.png);
+			background-size: cover;
+			display: inline-block;
+			height: 100%;
+			width: 100%;
+		}
+		.icon-login{
+			background-image : url(resources/icon2.png);
+			background-size: cover;
+			display: inline-block;
+			height: 100%;
+			width: 100%;
+		}
+		.icon-register{
+			background-image : url(resources/icon3.png);
+			background-size: cover;
+			display: inline-block;
+			height: 100%;
+			width: 100%;
+		}
+		.btn:hover{
+			background-color:#1C4773;
+		}
+	</style>
 </head>
 <body>
 <!-- <img src="resources/cinema-slide.jpg" style="width:100%"> -->
@@ -36,10 +62,18 @@
 		<span class="dot" onclick="currentSlide(2)"></span>
 		<span class="dot" onclick="currentSlide(3)"></span>
 	</div> 
-
+	<div class="row centered-500" style="margin-bottom:100px;margin-top:60px;">
+		<a href="movies.php"><div class="btn div250x250" ><i class="icon-movies"></i></div></a>
+		<div class="btn div250x250"></div>
+		<div class="w-100"></div>
+		<?php if(!(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true)){?>
+		<a href="login.php"><div class="btn div250x250"><i class="icon-login"></i></div></a>
+		<a href="signup.php"><div class="btn div250x250"><i class="icon-register"></i></div></a>
+		<?php }?>
+	</div>
 </div>
 <script src="slides.js"></script>
-<?php #include("includes/footer.php");?>
+<!-- <?php include("footer.php");?> -->
 
 </body>
 </html>

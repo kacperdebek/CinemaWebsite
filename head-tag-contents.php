@@ -13,9 +13,11 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <style>
+	
 	body{
 		background-color: #343A40;
 		color:white;
+		font-family: sans-serif;
 	}
 	.footer {
 		font-size: 14px;
@@ -37,6 +39,16 @@
 	.white-outline {
 		outline: 2px solid #ccc;
 	}
+	.centered-500{
+		margin: 0 auto;
+		width: 500px;
+		text-align: center;
+	}
+	.div250x250{
+		height: 250px;
+		width: 250px;
+	}
+	
 	.center-pills {
 		display: flex;
 		justify-content: center;
@@ -68,5 +80,14 @@
 	}
 	a:active {
 		text-decoration: none;
+	}
+	.footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: gray;
+	color: white;
+	text-align: center;
 	}
 </style>

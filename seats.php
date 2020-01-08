@@ -5,7 +5,24 @@
 <head>
     <?php include("head-tag-contents.php");?>
     
-    <link rel="stylesheet" href="seats.css">
+    <link rel="stylesheet" href="seats.css?version=2">
+    <?php
+        $hour = $_POST['hour'];
+        $day = $_POST['day'];
+        $film = $_POST['film'];
+        $showing = mysqli_query($mysqli,"SELECT id_seansu FROM seans WHERE dzień = '$day' and godzina = '$hour' and id_filmu = (SELECT id_filmu from film where tytuł_filmu = '$film')");
+        $row = mysqli_fetch_array($showing);
+        $showing_id = $row["id_seansu"];
+        $reservation = mysqli_query($mysqli,"select rezerwacja.czy_zajęte from rezerwacja inner join seans_rezerwacja
+        on seans_rezerwacja.id_rezerwacji = rezerwacja.id_rezerwacji
+        where seans_rezerwacja.id_seansu = '$showing_id'");
+        while($row2 = mysqli_fetch_array($reservation)){
+            $reservation_id[] = $row2["czy_zajęte"];
+        }
+        //print_r($reservation_id);
+
+    ?>
+    
 </head>
 <body>
 <div class="container" id="main-content">
@@ -159,7 +176,15 @@
     </div>
     <button type="button" class="btn" id="request" style="margin-left: 50%">Zamów</button>
 </div>
-    
+    <script>
+        var seats_array = <?php echo json_encode($reservation_id);?>;
+        var i = 1;
+        for(i = 1; i < 99; i++){
+            if(seats_array[i - 1] == 1){
+                document.getElementById("s" + i).className = "seat reserved";
+            }
+        }
+    </script>
      <script>
         var selected = []; 
         var hour = "<?php echo $_POST['hour'];?>";
